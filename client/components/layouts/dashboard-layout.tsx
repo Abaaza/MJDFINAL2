@@ -7,7 +7,7 @@ import { Sidebar } from "@/components/navigation/sidebar"
 import { TopBar } from "@/components/navigation/top-bar"
 import { BottomNav } from "@/components/navigation/bottom-nav"
 import { cn } from "@/lib/utils"
-import { useMobileOptimization } from "@/hooks/use-mobile-optimization"
+import { useMobileOptimization } from "@/components/mobile-optimization-provider"
 import { useScrollLock } from "@/hooks/use-scroll-lock"
 import { LayoutContext } from "@/contexts/layout-context"
 
