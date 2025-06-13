@@ -6,7 +6,7 @@ import { FileText, Upload, Users, Settings, BarChart3, CircleDollarSign, Chevron
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useEffect, useCallback, memo } from "react"
-import { useMobileOptimization } from "@/hooks/use-mobile-optimization"
+import { useMobileOptimization } from "@/components/mobile-optimization-provider"
 import { useLayout } from "@/contexts/layout-context"
 import { Logo } from "@/components/ui/logo"
 import { UserProfile } from "@/components/user/user-profile"

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Eye, Edit, Download, Filter, Search } from "lucide-react"
 import Link from "next/link"
-import { useMobileOptimization } from "@/hooks/use-mobile-optimization"
+import { useMobileOptimization } from "@/components/mobile-optimization-provider"
 import { useDebounce } from "@/hooks/use-debounce"
 import { cn } from "@/lib/utils"
 

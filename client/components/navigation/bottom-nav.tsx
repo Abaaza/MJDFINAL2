@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { FileText, Upload, Users, Settings } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useMobileOptimization } from "@/hooks/use-mobile-optimization"
+import { useMobileOptimization } from "@/components/mobile-optimization-provider"
 import { memo } from "react"
 
 const navItems = [
