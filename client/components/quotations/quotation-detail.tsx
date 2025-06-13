@@ -99,7 +99,7 @@ export const QuotationDetail = memo(function QuotationDetail({ quotationId }: Qu
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="flex items-center space-x-4">
-          <Link href="/">
+          <Link href="/quotations">
             <Button variant="ghost" size="icon" className="hover:bg-white/10 ripple">
               <ArrowLeft className="h-5 w-5" />
             </Button>
