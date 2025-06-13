@@ -21,31 +21,50 @@ export interface Quotation {
 const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
 export async function loadQuotations(): Promise<Quotation[]> {
-  const res = await fetch(`${base}/api/quotations`, { cache: 'no-store' })
-  if (!res.ok) return []
-  return (await res.json()) as Quotation[]
+  try {
+    const res = await fetch(`${base}/api/quotations`, { cache: 'no-store' })
+    if (!res.ok) return []
+    return (await res.json()) as Quotation[]
+  } catch (err) {
+    console.error('Failed to load quotations', err)
+    return []
+  }
 }
 
 export async function saveQuotation(q: Quotation): Promise<Quotation> {
-  const res = await fetch(`${base}/api/quotations`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(q),
-  })
-  if (!res.ok) {
-    const msg = await res.text()
-    throw new Error(`Save failed: ${msg}`)
+  try {
+    const res = await fetch(`${base}/api/quotations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(q),
+    })
+    if (!res.ok) {
+      const msg = await res.text()
+      throw new Error(`Save failed: ${msg}`)
+    }
+    return res.json() as Promise<Quotation>
+  } catch (err) {
+    console.error('Failed to save quotation', err)
+    throw err
   }
-  return res.json() as Promise<Quotation>
 }
 
 export async function getQuotation(id: string): Promise<Quotation | undefined> {
-  const res = await fetch(`${base}/api/quotations/${id}`, { cache: 'no-store' })
-  if (!res.ok) return undefined
-  return (await res.json()) as Quotation
+  try {
+    const res = await fetch(`${base}/api/quotations/${id}`, { cache: 'no-store' })
+    if (!res.ok) return undefined
+    return (await res.json()) as Quotation
+  } catch (err) {
+    console.error('Failed to load quotation', err)
+    return undefined
+  }
 }
 
 export async function deleteQuotation(id: string) {
-  await fetch(`${base}/api/quotations/${id}`, { method: 'DELETE' })
+  try {
+    await fetch(`${base}/api/quotations/${id}`, { method: 'DELETE' })
+  } catch (err) {
+    console.error('Failed to delete quotation', err)
+  }
 }
 
