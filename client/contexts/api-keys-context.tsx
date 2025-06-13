@@ -1,7 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect } from "react"
-import { useAuth } from "@/contexts/auth-context"
+import React, { createContext, useContext, useState } from "react"
 
 interface ApiKeyContextType {
   openaiKey: string
@@ -12,33 +11,17 @@ interface ApiKeyContextType {
 }
 
 const ApiKeyContext = createContext<ApiKeyContextType>({
-  openaiKey: "",
-  cohereKey: "",
-  geminiKey: "",
+  openaiKey: process.env.NEXT_PUBLIC_OPENAI_KEY ?? "",
+  cohereKey: process.env.NEXT_PUBLIC_COHERE_KEY ?? "",
+  geminiKey: process.env.NEXT_PUBLIC_GEMINI_KEY ?? "",
   setKeys: () => {},
   saveKeys: () => {}
 })
 
 export function ApiKeyProvider({children}:{children:React.ReactNode}){
-  const { user } = useAuth()
-  const uid = user?.id ?? 'guest'
-  const [openaiKey,setOpenai] = useState("")
-  const [cohereKey,setCohere] = useState("")
-  const [geminiKey,setGemini] = useState("")
-
-  useEffect(() => {
-    const stored = localStorage.getItem(`apiKeys_${uid}`)
-    if(stored){
-      const k = JSON.parse(stored)
-      setOpenai(k.openaiKey||"")
-      setCohere(k.cohereKey||"")
-      setGemini(k.geminiKey||"")
-    } else {
-      setOpenai("")
-      setCohere("")
-      setGemini("")
-    }
-  },[uid])
+  const [openaiKey,setOpenai] = useState(process.env.NEXT_PUBLIC_OPENAI_KEY ?? "")
+  const [cohereKey,setCohere] = useState(process.env.NEXT_PUBLIC_COHERE_KEY ?? "")
+  const [geminiKey,setGemini] = useState(process.env.NEXT_PUBLIC_GEMINI_KEY ?? "")
 
   const setKeys = (keys: Partial<{openaiKey:string;cohereKey:string;geminiKey:string}>) => {
     if(keys.openaiKey!==undefined) setOpenai(keys.openaiKey)
@@ -47,8 +30,7 @@ export function ApiKeyProvider({children}:{children:React.ReactNode}){
   }
 
   const saveKeys = () => {
-    const all = { openaiKey, cohereKey, geminiKey }
-    localStorage.setItem(`apiKeys_${uid}`, JSON.stringify(all))
+    // Keys are provided via environment variables in production
   }
 
   return (

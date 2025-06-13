@@ -21,7 +21,7 @@ export default function RegisterPage() {
     e.preventDefault()
     try {
       await register(name,email,password,guests)
-      router.push("/")
+      router.push("/quotations")
     } catch (err) {
       setError("Registration failed")
     }
