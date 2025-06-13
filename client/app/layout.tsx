@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: "BOQ Pricing Pro",
   description: "Premium quotation management for construction projects",
   manifest: "/manifest.json",
-  themeColor: "#000000",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -42,6 +41,7 @@ export const viewport: Viewport = {
   minimumScale: 1,
   userScalable: true,
   viewportFit: "cover",
+  themeColor: "#000000",
 }
 
 export default function RootLayout({
