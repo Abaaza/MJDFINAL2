@@ -8,12 +8,12 @@ interface UserProfileProps {
 }
 
 export const UserProfile = memo(function UserProfile({ collapsed }: UserProfileProps) {
+  const router = useRouter()
+  const { user, logout } = useAuth()
+
   if (collapsed) {
     return null
   }
-
-  const router = useRouter()
-  const { user, logout } = useAuth()
 
   const handleLogout = () => {
     logout()
