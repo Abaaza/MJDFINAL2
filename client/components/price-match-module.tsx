@@ -330,8 +330,8 @@ export function PriceMatchModule({ onMatched }: PriceMatchModuleProps) {
       date: new Date().toISOString(),
       items
     }
-    await saveQuotation(quotation)
-    return quotation.id
+    const saved = await saveQuotation(quotation)
+    return saved.id
   }
 
   const handleDeleteRow = (index: number) => {
@@ -369,7 +369,13 @@ export function PriceMatchModule({ onMatched }: PriceMatchModuleProps) {
       alert('Project and client name are required')
       return
     }
-    const id = await saveQuotationData(results, autoQuoteId || undefined)
+    let id: string
+    try {
+      id = await saveQuotationData(results, autoQuoteId || undefined)
+    } catch (err: any) {
+      alert(err.message || 'Save failed')
+      return
+    }
     setAutoQuoteId(id)
     const items = results.map((r, idx) => {
       const sel = typeof r.selected === 'number' ? r.matches[r.selected] : null

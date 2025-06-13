@@ -1,4 +1,5 @@
-const base = process.env.NEXT_PUBLIC_API_URL ?? "";
+// Default to local backend when env var is not set
+const base = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 export async function loginUser(email: string, password: string) {
   const res = await fetch(`${base}/api/auth/login`, {
